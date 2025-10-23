@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLXFree - Plataforma de Divulgação Colaborativa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variáveis de cores e estilos */
+        :root {
+            --primary: #ffffff;
+            --secondary: #f8f9fa;
+            --accent: #4fc3f7;
+            --accent-light: #e1f5fe;
+            --text: #333333;
+            --text-light: #666666;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 8px;
+        }
+
+        /* Reset e estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            background-color: #03a9f4;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+            max-width: 180px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--primary) 100%);
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .btn {
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--secondary);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Mission Section */
+        .mission {
+            background-color: var(--primary);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .mission-item {
+            background-color: var(--primary);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .mission-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .mission-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        /* Strategy Section */
+        .strategy {
+            background-color: var(--secondary);
+        }
+
+        .strategy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Market Section */
+        .market {
+            background-color: var(--primary);
+        }
+
+        .market-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .market-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 20px;
+            margin: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* Process Section */
+        .process {
+            background-color: var(--secondary);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 20px;
+            margin: 10px;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        /* Crypto Section */
+        .crypto {
+            background-color: var(--primary);
+        }
+
+        .crypto-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Plans Section */
+        .plans {
+            background-color: var(--secondary);
+        }
+
+        .plans-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .plan {
+            background-color: var(--primary);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .plan:hover {
+            transform: translateY(-10px);
+        }
+
+        .plan h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .plan-price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .plan-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Team Section */
+        .team {
+            background-color: var(--primary);
+        }
+
+        .team-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-column p,
+        .footer-column a {
+            color: #bdc3c7;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                box-shadow: var(--shadow);
+                padding: 20px;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 120px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="./assets/logo.png" alt="Logo TLXFree">
+            </div>
+            <nav>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#mission">Missão</a></li>
+                    <li><a href="#strategy">Estratégia</a></li>
+                    <li><a href="#plans">Planos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Seja Bem Vindos</h1>
+            <p>Prepare-se para embarcar em uma jornada de sucesso</p>
+            <a href="#" class="btn">Acessar Site Oficial</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content fade-in">
+                <p>Uma plataforma digital de divulgação colaborativa, onde pessoas reais são pagas para divulgar
+                    produtos, serviços e marcas em suas redes sociais. Empresas agora podem contar com divulgações
+                    engajadas e autênticas, promovendo com credibilidade e impacto.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission" id="mission">
+        <div class="container">
+            <h2>MISSÃO TLXFREE</h2>
+            <div class="mission-grid">
+                <div class="mission-item fade-in">
+                    <div class="mission-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Missão 1</h3>
+                    <p>Unir tecnologia e marketing digital para oferecer uma nova forma de engajamento, circulação de
+                        valor entre comunidades globais.</p>
+                </div>
+                <div class="mission-item fade-in">
+                    <div class="mission-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Missão 2</h3>
+                    <p>Promovendo a inclusão financeira, oferecendo soluções inovadoras para o mercado.</p>
+                </div>
+                <div class="mission-item fade-in">
+                    <div class="mission-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Missão 3</h3>
+                    <p>Proporcionando oportunidades reais para que as pessoas mudem suas vidas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy Section -->
+    <section class="strategy" id="strategy">
+        <div class="container">
+            <h2>Nossa Estratégia de Marketing</h2>
+            <div class="strategy-content fade-in">
+                <p>Do que vive a internet e as mídias sociais? Elas vivem de publicidade!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Section -->
+    <section class="market">
+        <div class="container">
+            <h2>O Mercado de Divulgação Digital</h2>
+            <div class="market-content fade-in">
+                <p>A publicidade online está em plena expansão:</p>
+                <div class="market-stats">
+                    <div class="stat">
+                        <div class="stat-number">US$ 700 BILHÕES</div>
+                        <p>Investimento global em tráfego pago em 2024</p>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">R$ 40 BILHÕES</div>
+                        <p>Gastos em anúncios digitais no Brasil no último ano</p>
+                    </div>
+                </div>
+                <p>Campanhas em plataformas como Meta (Facebook e Instagram), Google e TikTok custam caro e nem sempre
+                    convertem.</p>
+                <p><strong>A solução? Marketing com pessoas reais.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <h2>Como Funciona</h2>
+            <div class="process-steps">
+                <div class="step fade-in">
+                    <div class="step-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Plataforma cria campanha</h3>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3>TLXFree distribui o conteúdo</h3>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3>Usuário posta nas redes sociais</h3>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Usuário recebe pagamentos semanais</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crypto Section -->
+    <section class="crypto">
+        <div class="container">
+            <h2>A Criptomoeda TLXCOIN</h2>
+            <div class="crypto-content fade-in">
+                <p>O primeiro projeto promovido pela TLXFree é a TLXCoin. Uma criptomoeda que já nasceu com unidade e
+                    força de mercado.</p>
+                <p>- Apoiada por uma base real de divulgações, não depende apenas de especulação.</p>
+                <p>- Criada para ser usada, divulgada e valorizada pela comunidade da plataforma.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section class="plans" id="plans">
+        <div class="container">
+            <h2>2 Tipos de Ganho Individual</h2>
+            <div class="plans-container">
+                <div class="plan fade-in">
+                    <h3>AD-CENTRAL</h3>
+                    <div class="plan-price">US$ 339</div>
+                    <ul class="plan-features">
+                        <li>Contrato anual</li>
+                        <li>Ganho semanal: US$ 20</li>
+                        <li>Ganho mensal: US$ 80</li>
+                        <li>Ganho anual: US$ 1.040</li>
+                    </ul>
+                    <a href="#" class="btn">Escolher Plano</a>
+                </div>
+                <div class="plan fade-in">
+                    <h3>AD-CENTRAL FAMILY</h3>
+                    <div class="plan-price">US$ 1.425</div>
+                    <ul class="plan-features">
+                        <li>Contrato anual</li>
+                        <li>Ganho semanal: US$ 100</li>
+                        <li>Ganho mensal: US$ 400</li>
+                        <li>Ganho anual: US$ 5.200</li>
+                    </ul>
+                    <a href="#" class="btn">Escolher Plano</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h2>Ganho de Equipe</h2>
+            <div class="team-content fade-in">
+                <p>Compartilhe e ajude outras pessoas a se tornarem divulgadores TLX. Você será recompensado por cada
+                    indicação!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-envelope"></i> equipe.tlxfree@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +55 12 98182-3180</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <a href="#home">Início</a>
+                    <a href="#about">Sobre</a>
+                    <a href="#mission">Missão</a>
+                    <a href="#plans">Planos</a>
+                </div>
+            <div class="copyright">
+                <p>&copy; 2025 TLXFree. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        document.querySelector('.mobile-menu').addEventListener('click', function () {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+
+        // Animação de scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('load', fadeInOnScroll);
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('nav ul').classList.remove('show');
+            });
+        });
+    </script>
+</body>
+
+</html>
