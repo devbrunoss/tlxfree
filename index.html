@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +43,12 @@
         }
 
         /* Tipografia */
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 1rem;
@@ -245,12 +251,19 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
                 transform: translateY(0) translateX(-50%);
             }
+
             40% {
                 transform: translateY(-10px) translateX(-50%);
             }
+
             60% {
                 transform: translateY(-5px) translateX(-50%);
             }
@@ -652,14 +665,156 @@
                 cursor: pointer;
             }
         }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        /* Para garantir que a logo não fique muito grande em telas menores */
+        @media (max-width: 768px) {
+            .logo-img {
+                height: 35px;
+            }
+        }
+
+        /* Ajustes para tablets */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .about-content {
+                gap: 2rem;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        /* Ajustes para mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero {
+                padding-top: 7rem;
+                padding-bottom: 3rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content {
+                text-align: left;
+            }
+
+            .about-icon {
+                font-size: 5rem;
+            }
+
+            .value-card,
+            .plan-card,
+            .team-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .coin-features {
+                gap: 1.5rem;
+            }
+
+            .coin-feature {
+                max-width: 100%;
+                flex-basis: calc(50% - 1rem);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .contact-info li {
+                justify-content: center;
+            }
+        }
+
+        /* Ajustes para telas muito pequenas */
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 0.8rem 1rem;
+            }
+
+            .logo-img {
+                height: 30px;
+            }
+
+            .hero-content h1 {
+                font-size: 1.6rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .coin-feature {
+                flex-basis: 100%;
+            }
+
+            .step-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .step-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .plan-price {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header>
         <div class="header-container">
             <a href="#home" class="logo">
-                <div class="logo-placeholder">TLX Free</div>
+                <img class="logo-img" src="./assets/logo.png" alt="TLX Free">
             </a>
             <nav class="desktop-nav">
                 <ul>
@@ -712,8 +867,10 @@
             <h2>Sobre a TLX Free</h2>
             <div class="about-content">
                 <div class="about-text fade-in">
-                    <p>A TLX Free é uma plataforma digital que conecta pessoas reais a marcas, permitindo que qualquer um ganhe por divulgar produtos de forma autêntica e colaborativa.</p>
-                    <p>Nossa missão é transformar a maneira como as pessoas interagem com marcas, criando uma rede de divulgação genuína e recompensadora para todos os envolvidos.</p>
+                    <p>A TLX Free é uma plataforma digital que conecta pessoas reais a marcas, permitindo que qualquer
+                        um ganhe por divulgar produtos de forma autêntica e colaborativa.</p>
+                    <p>Nossa missão é transformar a maneira como as pessoas interagem com marcas, criando uma rede de
+                        divulgação genuína e recompensadora para todos os envolvidos.</p>
                 </div>
                 <div class="about-visual fade-in">
                     <div class="about-icon">
@@ -840,7 +997,8 @@
                 </div>
                 <h2>TLX Coin</h2>
                 <p>A moeda digital que revoluciona o mercado de divulgação colaborativa.</p>
-                <p>Com a TLX Coin, você pode acumular recompensas, trocar por produtos e serviços, e participar de uma economia descentralizada e transparente.</p>
+                <p>Com a TLX Coin, você pode acumular recompensas, trocar por produtos e serviços, e participar de uma
+                    economia descentralizada e transparente.</p>
                 <div class="coin-features">
                     <div class="coin-feature">
                         <i class="fas fa-shield-alt"></i>
@@ -879,7 +1037,8 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <h3>Carlos Mendes</h3>
-                    <p>"Uma plataforma intuitiva que me permite ganhar enquanto uso minhas redes sociais normalmente."</p>
+                    <p>"Uma plataforma intuitiva que me permite ganhar enquanto uso minhas redes sociais normalmente."
+                    </p>
                 </div>
                 <div class="team-card neumorphism fade-in">
                     <div class="team-photo">
@@ -982,6 +1141,20 @@
                 header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
             }
         });
+
+        // Adicione este código no seu script existente
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Prevenir fechamento ao clicar dentro do menu
+        mobileMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
     </script>
 </body>
+
 </html>
